@@ -1,15 +1,13 @@
-import express from 'express';
-import cors from 'cors';
-import fs from 'fs/promises';
-import path from 'path';
-
-const filePath = path.resolve('mockup_data', 'phones.json');
-
-async function read() {
-  const dataPhones = await fs.readFile(filePath, 'utf-8');
-
-  return JSON.parse(dataPhones);
-}
+const express = require('express');
+const cors = require('cors');
+const { Client } = require('pg')
+const client = new Client({
+  host: 'localhost',
+  user: 'postgres',
+  database: 'phones',
+  password: 'Vv0820132525'
+})
+client.connect()
 
 const PORT = 3000;
 
@@ -18,9 +16,11 @@ const app = express();
 app.use(cors());
 
 app.get('/phones', async (req, res) => {
-  const data = await read();
+  const data = await client.query(`SELECT * FROM public."Phones"`);
 
-  res.send(data);
+  console.log(data.rows)
+
+  res.send(data.rows);
 })
 
 app.get('/phones/:id', async (req, res) => {
