@@ -2,10 +2,12 @@
 
 /** @type {import('sequelize-cli').Migration} */
 const data = require('../../mockup_data/phones.json');
+const URL = 'https://raw.githubusercontent.com/grynkos-witnesses/nice-gadgets-img/main/';
 
 const preaperedData = data.map(d => {
   return {
     ...d,
+    image: URL + d.image,
     createdAt: new Date(),
     updatedAt: new Date(),
   }
