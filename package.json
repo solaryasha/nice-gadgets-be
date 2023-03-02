@@ -9,7 +9,6 @@
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint . --ignore-path .gitignore --fix",
     "fix-style": "mpm run format && npm run lint",
-    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
